@@ -1,0 +1,50 @@
+import React, { Component } from 'react';
+import './TodoInput.css';
+export default class TodoInput extends Component {
+	constructor(props) {
+		super(props);
+
+		this.state = {
+			value: ''
+		};
+
+		this.handleChange = this.handleChange.bind(this);
+
+		this.addTodo = this.addTodo.bind(this);
+	}
+
+	handleChange(e) {
+		this.setState({ value: e.target.value });
+	}
+
+	addTodo(todo) {
+		// Ensure that the value of the todo field is not empty
+		console.log(todo);
+
+		if (todo.length > 0) {
+			console.log(todo);
+			this.props.addTodo(todo);
+			this.setState({ value: '' });
+		}
+	}
+
+	render() {
+		return (
+			<div>
+				{/* creating the input field for the users to input the data -- Use onChange prop */}
+				<input
+					type="text"
+					value={this.state.value}
+					onChange={this.handleChange}
+				/>
+
+				<button
+					className="btn btn-primary"
+					onClick={() => this.addTodo(this.state.value)}
+				>
+					Submit
+				</button>
+			</div>
+		);
+	}
+}
